@@ -10,4 +10,8 @@ import java.util.Optional;
 @Repository
 public interface AppUserRepository extends JpaRepository<AppUserEntity, Integer> {
     List<AppUserEntity> findByIsActiveTrue();
+
+    Iterable<AppUserEntity> findAllByUserRole(String role);
+
+    Optional<AppUserEntity> findByAppUserId(String name);
 }

@@ -7,5 +7,5 @@ public interface LoginService {
 
     LoginResponse getAccessToken(String userName);
 
-    AppUserEntity register(AppUserEntity emeritusUser);
+    AppUserEntity register(AppUserEntity appUserEntity);
 }

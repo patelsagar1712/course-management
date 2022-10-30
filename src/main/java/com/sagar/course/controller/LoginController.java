@@ -28,7 +28,7 @@ public class LoginController {
 
     @PostMapping(path = "/register")
     public ResponseEntity<?> register(@RequestBody @Validated AppUserEntity appUserEntity) {
-        AppUserEntity savedEmeritusUser = loginService.register(appUserEntity);
-        return new ResponseEntity<>(savedEmeritusUser, HttpStatus.CREATED);
+        AppUserEntity appUser = loginService.register(appUserEntity);
+        return new ResponseEntity<>(appUser, HttpStatus.CREATED);
     }
 }

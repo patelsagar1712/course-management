@@ -50,7 +50,7 @@ public class LoginServiceImpl implements LoginService {
 
         String token = Jwts
                 .builder()
-                .setId("emeritusJwts")
+                .setId("Jwts")
                 .setSubject(username)
                 .claim("authorities",
                         grantedAuthorities.stream()

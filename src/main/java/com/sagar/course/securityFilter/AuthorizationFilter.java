@@ -25,27 +25,23 @@ public class AuthorizationFilter extends OncePerRequestFilter {
     private final String HEADER = "Authorization";
     private final String PREFIX = "Bearer ";
 
-    private String secretKey;
+    private final String secretKey;
 
     public AuthorizationFilter(String secretKey) {
         this.secretKey = secretKey;
     }
 
     /**
-     * Same contract as for {@code doFilter}, but guaranteed to be
-     * just invoked once per request within a single request thread.
-     * See {@link #shouldNotFilterAsyncDispatch()} for details.
-     * <p>Provides HttpServletRequest and HttpServletResponse arguments instead of the
-     * default ServletRequest and ServletResponse ones.
-     *
      * @param request
      * @param response
      * @param filterChain
+     * @throws ServletException
+     * @throws IOException
      */
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
-            if (checkJWTToken(request, response)) {
+            if (checkJWTToken(request)) {
                 Claims claims = validateToken(request);
                 if (claims.get("authorities") != null) {
                     setUpSpringAuthentication(claims);
@@ -84,10 +80,8 @@ public class AuthorizationFilter extends OncePerRequestFilter {
 
     }
 
-    private boolean checkJWTToken(HttpServletRequest request, HttpServletResponse res) {
+    private boolean checkJWTToken(HttpServletRequest request) {
         String authenticationHeader = request.getHeader(HEADER);
-        if (authenticationHeader == null || !authenticationHeader.startsWith(PREFIX))
-            return false;
-        return true;
+        return authenticationHeader != null && authenticationHeader.startsWith(PREFIX);
     }
 }

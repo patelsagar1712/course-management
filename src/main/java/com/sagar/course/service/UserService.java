@@ -7,6 +7,8 @@ import java.util.List;
 public interface UserService {
     List<AppUserEntity> getAllUsers();
 
+    Iterable<AppUserEntity> getAllUsers(String role);
+
     AppUserEntity createUser(AppUserEntity appUser);
 
     AppUserEntity getUserById(int userId);

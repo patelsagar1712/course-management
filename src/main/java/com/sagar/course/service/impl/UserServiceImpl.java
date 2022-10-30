@@ -5,10 +5,13 @@ import com.sagar.course.entity.AppUserEntity;
 import com.sagar.course.exception.RecordNotFoundException;
 import com.sagar.course.repository.AppUserRepository;
 import com.sagar.course.service.UserService;
+import com.sagar.course.util.ApplicationRoles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -28,6 +31,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<AppUserEntity> getAllUsers() {
         return appUserRepository.findByIsActiveTrue();
+    }
+
+    /**
+     *
+     */
+    public Iterable<AppUserEntity> getAllUsers(String role) {
+        String finalRole = role;
+        Optional<ApplicationRoles> optionalRoles = Arrays.stream(ApplicationRoles.values()).filter(roles -> roles.getApplicationRoles().equalsIgnoreCase(finalRole)).findFirst();
+        if (optionalRoles.isPresent()) {
+            return appUserRepository.findAllByUserRole(optionalRoles.get().getApplicationRoles());
+        }
+        throw new RecordNotFoundException(AppUserEntity.class.getSimpleName());
     }
 
     /**
