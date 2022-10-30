@@ -5,6 +5,9 @@ Please configure Project locally and try using Swagger UI to access the endpoint
 Please Start with Creating a user using /register and getting a JWT token using /login method.
 
 
+Use Swagger for API Information and Make API calls 
+
+http://localhost:8088/swagger-ui/index.html
 
 TO DO: 
 
