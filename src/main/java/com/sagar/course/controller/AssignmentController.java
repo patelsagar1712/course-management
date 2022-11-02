@@ -2,6 +2,7 @@ package com.sagar.course.controller;
 
 import com.sagar.course.entity.AssignmentEntity;
 import com.sagar.course.service.AssignmentService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = "/assignment")
 @Secured({"INSTRUCTOR"})
+@SecurityRequirement(name = "Bearer Authentication")
 public class AssignmentController {
     @Autowired
     AssignmentService assignmentService;

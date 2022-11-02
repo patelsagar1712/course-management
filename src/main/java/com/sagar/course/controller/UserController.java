@@ -2,6 +2,7 @@ package com.sagar.course.controller;
 
 import com.sagar.course.entity.AppUserEntity;
 import com.sagar.course.service.UserService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 @Secured({"SYSTEM_ADMIN"})
+@SecurityRequirement(name = "Bearer Authentication")
 public class UserController {
 
     @Autowired

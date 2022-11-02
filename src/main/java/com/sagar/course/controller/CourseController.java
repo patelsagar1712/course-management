@@ -2,6 +2,7 @@ package com.sagar.course.controller;
 
 import com.sagar.course.entity.CourseEntity;
 import com.sagar.course.service.CourseService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.access.annotation.Secured;
@@ -18,6 +19,7 @@ import java.security.Principal;
 
 @RestController
 @RequestMapping(path = "/course")
+@SecurityRequirement(name = "Bearer Authentication")
 public class CourseController {
 
 

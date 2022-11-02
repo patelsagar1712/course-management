@@ -3,13 +3,18 @@ package com.sagar.course.controller;
 import com.sagar.course.entity.AppUserEntity;
 import com.sagar.course.entity.CourseEntity;
 import com.sagar.course.service.EnrollmentService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
-
+@RestController
+@SecurityRequirement(name = "Bearer Authentication")
+@RequestMapping(path = "/enroll")
 public class EnrollmentController {
     @Autowired
     EnrollmentService enrollmentService;
